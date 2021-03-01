@@ -15,20 +15,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Insert Package Name
+# MD_Crime
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of XXX is to ...
+The goal of this package is to explore crimes in Maryland State.
 
 ## Installation
 
-The development version of XXX is available from [GitHub](https://github.com/) with:
+The development version of XXX is available from [GitHub](https://github.com/orgs/Reed-Math241/teams/pkggrpp) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Reed-Math241/pkgDemo")
+devtools::install_github("Reed-Math241/pkggrpp")
 ```
 ## Example
 
