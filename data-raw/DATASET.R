@@ -10,6 +10,7 @@ library(stringr)
 MD_Crime1 <- MD_crime %>%
   filter(State == "MD") %>%
   filter(grepl("2020", `Dispatch Date / Time`)) %>%
+  filter(`Crime Name1` == "Crime Against Person" | `Crime Name1` == "Crime Against Property" | `Crime Name1` == "Crime Against Society" ) %>%
   select(`Incident ID`, `Dispatch Date / Time`, `Crime Name1`, `Crime Name2`, `Crime Name3`, 
          Victims, City,Place, Start_Date_Time, End_Date_Time,Longitude, Latitude) %>%
   separate(col = `Dispatch Date / Time`, into = c("Dispatch Date", "Dispatch Time"), 
@@ -52,13 +53,14 @@ MD_Crime0 <- cbind(MD_Crime, MD_Crime2) %>%
   select(!MD_Crime2) %>%
   rename(`Crime Name2` = `Crime Name3`,
          `Crime Name3` = `Crime Name4`,
-         `Crime Name4` = `Crime Name5`)
+         `Crime Name4` = `Crime Name5`) 
 
 col_order <- c("Incident ID", "Crime Name1", "Crime Name2",
                "Crime Name3", "Crime Name4", "Victims", "City", "Place1", "Place2",
                "Dispatch Date", "Dispatch Time", "Start Date", "Start Time", "End Date", "End Time",
                "Longitude", "Latitude")
 MD_Crime <- MD_Crime0[, col_order]
+
 
 usethis::use_data(MD_Crime, overwrite = TRUE)
 
