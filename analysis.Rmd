@@ -1,0 +1,89 @@
+---
+title: "analysis"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(ggmap)
+```
+
+# crime number
+
+```{r}
+MD_Crime %>%
+  group_by(`Crime Name2`) %>%
+  count() %>%
+  arrange(desc(n)) %>%
+  as.data.frame()
+
+MD_Crime %>%
+  group_by(`Crime Name1`) %>%
+  count() %>%
+  arrange(n) 
+```
+
+# crime rate by city
+
+```{r}
+MD_Crime %>%
+  group_by(City)%>%
+  count() %>%
+  arrange(desc(n))
+10615/30587 = 0.3470429
+4501/30587 = 0.147154
+
+```
+
+# Location
+```{r}
+MD_Crime %>%
+  filter(Latitude != 0) %>%
+  ggplot(mapping = aes(x = Latitude, y = Longitude)) +
+  geom_hex() +
+  scale_fill_distiller(palette = "RdYlBu") +
+  ggtitle("Location And Density of Crimes in Maryland in 2020")
+
+https://www.littlemissdata.com/blog/maps
+
+register_google(key = "[Annekey]")
+
+p <- ggmap(get_googlemap(center = c(lon = -77.07960, lat = 39.09314),
+                    zoom = 11, scale = 2,
+                    maptype ='terrain',
+                    color = 'color'))
+
+```
+# Date and Time
+```{r}
+MD_Crime %>%
+  mutate(Date = `Dispatch Date` == `Start Date`) %>%
+  group_by(Date) %>%
+  count() %>%
+  mutate(prop = n/sum(n))
+
+MD_Crime %>%
+  mutate(Date = `Dispatch Date` == `Start Date`) %>%
+  mutate(Date = case_when(Date = TRUE ~ "Same Date",
+                          Date = FALSE ~ "Different Date")) %>%
+  group_by(Date) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count)) 
+# all on the same date
+
+MD_Crime %>%
+  mutate(Date = `Dispatch Date` == `Start Date`) %>%
+  filter(Date == TRUE) %>%
+  mutate(Dispatch = case_when(`Start Time` < `Dispatch Time` ~ "After",
+                           `Start Time` > `Dispatch Time` ~ "Before",
+                           `Start Time` == `Dispatch Time` ~ "On Time")) %>%
+  group_by(Dispatch)  %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count)) 
+```
+
