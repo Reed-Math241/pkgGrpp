@@ -24,15 +24,25 @@ The goal of this package is to investigate the numbers and types of crimes in Ma
 There are 30,587 observations, which can be identified by unique incident ID. Besides incident ID, 
 16 variables are included in the dataset, including Crime Name1, Crime Name2, Crime Name3, Crime Name4,
 Victim, City, Place1, Place2, Dispatch Date, Dispatch Time, Start Date, Start Time, End Date, End Time. 
-Crime Name1 illustrates the general categories of crimes: crime against person, crime against property and crime against society. Crime Name2 provides specific crime names, such as burglary, arson, assault, etc. Crime Name3 illustrates the subcategories of each specific crime. For example, it specifies the name of drugs (e.g, Marijuana) involves in the crime. 
-Crime Name4 provides further details of some crimes, such as "possessing" the drug or "selling" the drug. Place1 specifies where the crime is taken place, such as street, Grocery/supermarket. Place2 provides details of some places, such as "in vehicle" for "street". 
+Crime Name1 illustrates the general categories of crimes: crime against person, crime against property 
+and crime against society. Crime Name2 provides specific crime names, such as burglary, arson, 
+assault, etc. Crime Name3 illustrates the subcategories of each specific crime. For example, it specifies 
+the name of drugs (e.g, Marijuana) involves in the crime. 
+Crime Name4 provides further details of some crimes, such as "possessing" the drug or "selling" the drug. 
+Place1 specifies where the crime is taken place, such as street, Grocery/supermarket. Place2 provides 
+details of some places, such as "in vehicle" for "street". 
 
-With this dataset, we can explore the most common types of crimes in MD in 2020. Crime against property is the most common 
-main category of crime. More specifically, Larceny, assault and damage property are the three most commons crimes among all 70 crime types. There are total reports of 19,578 crimes against property, 10,326 larceny, 3723 assault, and 2578 damage property. 
-Apart from that, we can investigate the cities in MD with the most crime reported. Silver Spring has a total number of 10,615 crimes reported, which is 34.7% of all reported crimes. Gaithersburg has the second highest number of crimes, which is 4,501 and 14.7% of all crimes. 
-We can also depict the area with the highest crime cases from a more holistic perspective by graphing crimes with longitude 
-and latitude. Furthermore, we can compare the dispatch date of the police and the start date of the 
-crime to examine the efficiency of the police. It turns out that the police always dispatch on the same date for all the crimes.
+With this dataset, we can explore the most common types of crimes in MD in 2020. Crime against property 
+is the most common main category of crime. More specifically, Larceny, assault and damage property 
+are the three most commons crimes among all 70 crime types. There are total reports of 19,578 crimes 
+against property, 10,326 larceny, 3723 assault, and 2578 damage property. 
+Apart from that, we can investigate the cities in MD with the most crime reported. Silver Spring 
+has a total number of 10,615 crimes reported, which is 34.7% of all reported crimes. Gaithersburg has 
+the second highest number of crimes, which is 4,501 and 14.7% of all crimes. 
+We can also depict the area with the highest crime cases from a more holistic perspective by graphing 
+crimes with longitude and latitude. Furthermore, we can compare the dispatch date of the police and 
+the start date of the crime to examine the efficiency of the police. It turns out that the police always 
+dispatch on the same date for all the crimes.
 
 
 ## Installation
@@ -41,7 +51,7 @@ The development version of MD_Crime is available from [GitHub] (https://github.c
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Reed-Math241/pkggrpp")
+devtools::install_github("Reed-Math241/pkgGrpp")
 ```
 ## Example
 

@@ -1,10 +1,11 @@
 ## code to prepare `DATASET` dataset goes here
 
-MD_crime <- readr::read_csv("Crime (2).csv")
+MD_crime <- readr::read_csv("Crime.csv")
 
 library(tidyverse)
 library(dplyr)
 library(stringr)
+library(janitor)
 
 
 MD_Crime1 <- MD_crime %>%
@@ -54,6 +55,13 @@ MD_Crime0 <- cbind(MD_Crime, MD_Crime2) %>%
   rename(`Crime Name2` = `Crime Name3`,
          `Crime Name3` = `Crime Name4`,
          `Crime Name4` = `Crime Name5`) 
+
+MD_Crime0 <- MD_Crime0 %>%
+  mutate(`Crime Name1` = str_trim(`Crime Name1`),
+         `Crime Name2` = str_trim(`Crime Name2`),
+         `Crime Name3` = str_trim(`Crime Name3`),
+         Place1 = str_trim(Place1),
+         Place2 = str_trim(Place2))
 
 col_order <- c("Incident ID", "Crime Name1", "Crime Name2",
                "Crime Name3", "Crime Name4", "Victims", "City", "Place1", "Place2",
