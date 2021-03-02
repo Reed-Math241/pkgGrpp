@@ -1,9 +1,6 @@
 #' Maryland Crimes(2020)
 #'
-#' A subdataset of “Crime” dataset reported by National Incident-Based Reporting System (NIBRS) 
-#' of the Criminal Justice Information Services (CJIS) Division Uniform Crime Reporting (UCR) Program 
-#' and documented by approved police incident reports. The current dataset contains all the reported crimes
-#' in Maryland in 2020.
+#' A subdataset of “Crime” dataset reported by National Incident-Based Reporting System (NIBRS) of the Criminal Justice Information Services (CJIS) Division Uniform Crime Reporting (UCR) Program and documented by approved police incident reports. The current dataset contains all the reported crimes in Maryland in 2020.
 #'
 #' @format A data frame with 30587 rows and 17 variables:
 #' \describe{
