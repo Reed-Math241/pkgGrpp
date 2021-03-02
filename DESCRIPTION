@@ -1,11 +1,23 @@
-Package: pkgDemo
+Package: MD_Crime
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Crimes in Maryland, 2020
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: person(given = "Anne",
+           family = "Cao",
+           role = c("aut", "cre"),
+           email = "caoa@reed.edu")
+Maintainer: The package maintainer <caoa@reed.edu>
+Description: This package contains a subdataset of “Crime” dataset 
+reported by National Incident-Based Reporting System (NIBRS) of the Criminal 
+Justice Information Services (CJIS) Division Uniform Crime Reporting (UCR) 
+Program and documented by approved police incident reports. It contains 40,560 
+observations and 17 variables of reported crimes in Maryland in 2020. The main 
+variables reveal the crime types(1 main categories and 3 subcategories), number 
+of victims, locations(specific places, longitude, and latitude), city, dates and 
+times of the day(dispatch, start and end). 
+License: CC0
 Encoding: UTF-8
 LazyData: true
+Depends: 
+    R (>= 2.10)
+

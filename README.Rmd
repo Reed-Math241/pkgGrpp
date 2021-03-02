@@ -20,7 +20,19 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of this package is to explore crimes in Maryland State.
+The goal of this package is to investigate the numbers and types of crimes in Maryland in 2020. 
+There are XXX observations, which can be identified by unique incident ID. Besides incident ID, 
+XX variables are included in the dataset, including XXXX. X represents the general categories of 
+crimes: crime against person, crime against property, crime against society, not a crime, others. 
+X represents the specific crime name, X specifies subcategories or provide details, and X supply further 
+details of some crimes. 
+
+With this dataset, we can explore the most common types of crimes in MD in 2020, which are XXX. 
+Apart from that, we can investigate the cities in MD with the highest crime rates. We can also depict 
+the area with the highest crime cases from a more holistic perspective by graphing crimes with longitude 
+and latitude. Furthermore, we can compare the dispatch date of the police and the start time of the 
+crime to examine the efficiency of the police. 
+
 
 ## Installation
 
