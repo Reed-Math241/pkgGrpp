@@ -10,7 +10,7 @@
 #'   \item{Crime Name3}{A factor denoting subcategory of a specific crime (e.g,  Aggravated (Assault), Forced Entry (Burglary), Carjacking (Robbery), etc)}
 #'   \item{Crime Name4}{A factor denoting remaining important detail of a crime (e.g, Family (Assault), Nonresidental (Burglary), Armed (Robbery), etc)}
 #'   \item{Victims}{An integer denoting the number of vicims involved in a crime}
-#'   \item{City}{A factor denoting the city in Maryland in which a crime is commited}
+#'   \item{City}{A factor denoting the city in montgomery county in which a crime is commited}
 #'   \item{Place1}{A factor denoting the specific place where a crime is commited (e.g, Residence, Parking Lot, Street, etc)}
 #'   \item{Place2}{A factor denoting the subcategory of a place where a crime is commited(e.g, Garage (Residence), Commercial (Parking Lot), In vehicle (Street), etc)}
 #'   \item{Dispatch Date}{Date of police dispatch for a crime, by Month/Date/Year}

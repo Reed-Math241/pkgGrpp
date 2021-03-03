@@ -9,18 +9,18 @@ A data frame with 30587 rows and 17 variables:
 \describe{
   \item{Incident ID}{ID}
   \item{Crime Name1}{A factor denoting the general category of a crime(Crime Against Person, Crime Against Property, Crime Against Society)}
-  \item{Crime Name2}{A facotr denoting subcategory of a crime}
-  \item{Crime Name3}{A factor denoting spefic crime name}
-  \item{Crime Name4}{A factor denoting remaining important detail of a crime}
+  \item{Crime Name2}{A facotr denoting the specific name of a crime (e.g, Assault, Burglary, Robbery, etc)}
+  \item{Crime Name3}{A factor denoting subcategory of a specific crime (e.g,  Aggravated (Assault), Forced Entry (Burglary), Carjacking (Robbery), etc)}
+  \item{Crime Name4}{A factor denoting remaining important detail of a crime (e.g, Family (Assault), Nonresidental (Burglary), Armed (Robbery), etc)}
   \item{Victims}{An integer denoting the number of vicims involved in a crime}
-  \item{City}{A factor denoting the city in which a crime is commited}
-  \item{Place1}{A factor denoting the place where a crime is commited}
-  \item{Place2}{A factor denoting the subcategory of where a crime is commited}
-  \item{Dispatch Date}{Date of police dispatch for a crime}
-  \item{Dispatch Time}{Time of police dispatcch for a crime}
-  \item{Start Date}{Reported starting date of a crime}
+  \item{City}{A factor denoting the city in montgomery county in which a crime is commited}
+  \item{Place1}{A factor denoting the specific place where a crime is commited (e.g, Residence, Parking Lot, Street, etc)}
+  \item{Place2}{A factor denoting the subcategory of a place where a crime is commited(e.g, Garage (Residence), Commercial (Parking Lot), In vehicle (Street), etc)}
+  \item{Dispatch Date}{Date of police dispatch for a crime, by Month/Date/Year}
+  \item{Dispatch Time}{Time of police dispatch for a crime}
+  \item{Start Date}{Reported starting date of a crime, by Month/Date/Year}
   \item{Start Time}{Reported starting time of a crime}
-  \item{End Date}{Reported ending date of a crime}
+  \item{End Date}{Reported ending date of a crime, by Month/Date/Year}
   \item{End Time}{Reported ending time of a crime}
   \item{Longitude}{Longitude of where a crime is taken place}
   \item{Latitude}{Latitude of where a crime is taken place}

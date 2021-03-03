@@ -43,6 +43,13 @@ unique(MD_Crime$`Crime Name2`)
 
 https://stringr.tidyverse.org/reference/str_trim.html
 clean_names()
+
+MD_Crime %>% 
+  select(`Crime Name2`, Place1, Place2) %>%
+  filter(`Crime Name2` == "Rape") %>%
+  group_by(Place1, Place2) %>%
+  count() %>%
+  arrange(desc(n))
 ```
 
 # crime rate by city
@@ -56,6 +63,63 @@ MD_Crime %>%
 4501/30587 = 0.147154
 
 ```
+```{r, fig.height=3, fig.width=16}
+MD_Crime4 <- MD_Crime %>%
+  filter(`Crime Name2` == "Drugs" | `Crime Name2` == "Damage Property" | `Crime Name2` ==  "Assault") %>%
+  filter(Longitude != 0) %>%
+  group_by(`Crime Name2`)%>%
+  mutate(group = 1174,
+         subregion = "montgomery")
+
+MD <- map_data("county") %>%
+  filter(region == "maryland") %>%
+  rename(Longitude = long,
+         Latitude = lat) 
+ggplot(data = MD, mapping = aes(x = Longitude, y = Latitude, group = group, fill = subregion)) +
+   geom_polygon(fill = "white", color = "black") + 
+   facet_zoom(xlim = c(-76.90530, -77.51680),
+               ylim = c(38.93900, 39.34210)) #+
+   geom_point(data = MD_Crime4, mapping = aes(x=Longitude, y=Latitude, color = `Crime Name2`, alpha = 0.05)) +
+   theme(legend.title = element_blank(),
+         legend.position = "bottom") +
+  scale_color_manual(values = color) +
+  ggtitle("Location and Density of Crimes in Montgomery County in Maryland, 2020")
+
+
+#+
+  geom_text(aes(y = 38.994373, x = -77.029778, label = "Silver Spring")) +
+  geom_text(aes(y = 39.1440, x = -77.2016, label = "Gaithersburg")) +
+  geom_text(aes(y = 39.0840, x = -77.1528, label = "Rockville"))
+
+  
+
+color <- c("Assault" = "pink", "Damage Property" = "lightgoldenrod", "Drugs" = "lightblue")
+
+MD_Crime5 <- MD_Crime4 %>% mutate(across(is.numeric, ~ round(., 2))) %>%
+  filter(Longitude != 0)
+MD_Crime5 <- MD_Crime5 %>%
+  group_by(`Crime Name2`, `Longitude`, `Latitude`) %>%
+  count() %>%
+  mutate(group = 1174,
+         subregion = "montgomery")
+
+MD_Crime %>%
+  group_by(`Crime Name1`, `Crime Name2`) %>%
+  count() %>%
+  group_by(`Crime Name1`) %>%
+  arrange(desc(n))
+
+MD_Crime %>%
+  group_by(City) %>%
+  count() %>%
+  arrange(desc(n))
+
+```
+
+
+
+
+
 
 # Location
 ```{r}
@@ -72,60 +136,39 @@ us_states <- map_data("state") %>%
   filter(region == "maryland") %>%
   rename(Longitude = long,
          Latitude = lat)
-ggplot(data = us_states,
-            mapping = aes(x = long, y = lat, group = group)) +
-   geom_polygon(fill = "white", color = "black")
 
+
+us_counties <- map_data("county") %>%
+  filter(region == "maryland" & subregion == "montgomery") %>%
+  rename(Longitude = long,
+         Latitude = lat)
+
+MD <- map_data("county") %>%
+  filter(region == "maryland") %>%
+  rename(Longitude = long,
+         Latitude = lat) 
+ggplot(data = MD, mapping = aes(x = Longitude, y = Latitude, group = group, fill = subregion)) +
+   geom_polygon(fill = "white", color = "black") + 
+   facet_zoom(xlim = c(-76.90530, -77.51680),
+               ylim = c(38.93900, 39.34210)) +
+   geom_point(data = MD_Crime4, mapping = aes(x=Longitude, y=Latitude, color = `Crime Name1`))
 
 MD_Crime4 <- MD_Crime %>%
-  filter(`Crime Name2` == "Larceny" | `Crime Name2` == "Damage Property" | `Crime Name2` ==  "Assault" | `Crime Name2` == "Drugs"| `Crime Name2` ==  "Fraud") %>%
+  filter(`Crime Name2` == "Larceny" | `Crime Name2` == "Damage Property" | `Crime Name2` ==  "Assault") %>%
   filter(Longitude != 0) %>%
-  group_by(`Crime Name2`)
+  group_by(`Crime Name2`)%>%
+  mutate(group = 1174,
+         subregion = "montgomery")
   
-# Create breaks for the color scale
-mybreaks <- c(0.02, 0.04, 0.08, 1, 7)
-
-# Reorder data to show biggest cities on top
-data <- MD_Crime3 %>%
-  arrange(count) #%>%
-  mutate(name=factor(`Crime Name2`, unique(`Crime Name2`))) #%>%
-  mutate(pop=pop/1000000) 
-
-# Build the map
 
 library(ggforce)
-ggplot(data = us_states, mapping = aes(x = Longitude, y = Latitude)) +
-    geom_polygon(fill = "white", color = "black") +
-    facet_zoom(xlim = c(-76.90530, -77.51680),
-               ylim = c(38.93900, 39.34210)) +
-    geom_point(data = MD_Crime4, mapping = aes(x=Longitude, y=Latitude, color = `Crime Name2`)) 
 
-
-  
-  #+
-    scale_size_continuous(name="Population (in M)", trans="log", range=c(1,12), breaks=mybreaks) +
-    scale_alpha_continuous(name="Population (in M)", trans="log", range=c(0.1, .9), breaks=mybreaks) +
-    scale_color_viridis(option="magma", trans="log", breaks=mybreaks, name="Population (in M)" ) +
-    theme_void() + ylim(50,59) + coord_map() + 
-    guides( colour = guide_legend()) +
-    ggtitle("The 1000 biggest cities in the UK") +
-    theme(
-      legend.position = c(0.85, 0.8),
-      text = element_text(color = "#22211d"),
-      plot.background = element_rect(fill = "#f5f5f2", color = NA), 
-      panel.background = element_rect(fill = "#f5f5f2", color = NA), 
-      legend.background = element_rect(fill = "#f5f5f2", color = NA),
-      plot.title = element_text(size= 16, hjust=0.1, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
-    )
 
 ```
+
+
 # Date and Time
 ```{r}
-MD_Crime %>%
-  mutate(Date = `Dispatch Date` == `Start Date`) %>%
-  group_by(Date) %>%
-  count() %>%
-  mutate(prop = n/sum(n))
 
 MD_Crime %>%
   mutate(Date = `Dispatch Date` == `Start Date`) %>%
@@ -146,4 +189,12 @@ MD_Crime %>%
   summarise(count = n()) %>%
   mutate(proportion = count / sum(count)) 
 ```
-
+# Date
+```{r}
+ MD_Crime %>%
+ group_by(`Dispatch Date`) %>%
+  count() %>%
+  arrange(desc(n))
+  ggplot(aes(x = `Dispatch Date`, y = n), color = `Crime Name1`) +
+  geom_line()
+```
